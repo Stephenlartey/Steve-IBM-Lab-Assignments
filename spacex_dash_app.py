@@ -45,3 +45,26 @@ def get_pie_chart(entered_site):
         return fig
     else:
         # return the outcomes piechart for a selected site
+dcc.RangeSlider(id='payload-slider',
+                min=0, max=10000, step=1000,
+                marks={0: '0',
+                       100: '100'},
+                value=[min_payload, max_payload])
+@app.callback([Input(component_id='site-dropdown', component_property='value'),
+               Input(component_id='payload-slider', component_property='value')],
+               Output(component_id='success-payload-scatter-chart', component_property='figure'))
+
+def get_scatter_plot(entered_site):
+    filtered_df = spacex_df
+    if entered_site == 'ALL':
+        fig = px.scatter(data, values='class', 
+        names='scatter plot names',
+        color='Booster Version Category' 
+        title='title')
+        return fig
+    else:
+        return the outcomes scatter plot for a selected site
+
+# Run the app
+if __name__ == '__main__':
+    app.run_server()
