@@ -33,3 +33,15 @@ dcc.Dropdown(id='id',
                 placeholder="Select SpaceX launch site",
                 searchable=True
                 ),
+# Function decorator to specify function input and output
+@app.callback(Output(component_id='success-pie-chart', component_property='figure'),
+              Input(component_id='site-dropdown', component_property='value'))
+def get_pie_chart(entered_site):
+    filtered_df = spacex_df
+    if entered_site == 'ALL':
+        fig = px.pie(data, values='class', 
+        names='pie chart names', 
+        title='title')
+        return fig
+    else:
+        # return the outcomes piechart for a selected site
